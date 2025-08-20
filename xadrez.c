@@ -1,54 +1,80 @@
 #include <stdio.h>
 
-int main(){
+// Funções Recursivas
 
-    int torre = 1;
-    int bispo = 1;
+// Função recursiva para Torre (move para a direita)
+void torre(int casas) {
+    if (casas == 0) return;
+    printf("Direita\n");
+    torre(casas - 1);
+}
 
-    //Movimento da torre
-    //Simula o movimento da torre 5 casas à direita
-    
-    printf("Movimento da torre: \n");
-    while(torre <= 5){
-        printf("Direita\n");
-        torre++;
-    }
+// Função recursiva + loops aninhados para Bispo (cima + direita)
+void bispo(int casas) {
+    if (casas == 0) return;
 
-    //Movimento do bispo
-    //Simula o movimento do bispo 5 casas na diagonal pra cima e direita
-
-    printf("\nMovimento do bispo: \n");
-    do
-    {
-        printf("Cima, direita\n");
-        bispo++;
-    } while (bispo <= 5);
-
-    //Movimento da rainha
-    //Simula o movimento da rainha 8 casas à esqueda
-    
-    printf("\nMovimento da Rainha: \n");
-    for (int rainha = 1; rainha <= 8; rainha++)
-    {
-        printf("Esquerda\n");
-    }
-
-    //Movimento do cavalo
-    //Simula o movimento do cavalo em L duas casas para baixo e uma para esquerda
-
-    printf("\nMovimento do cavalo:\n");
-
-    int movimentoCavalo = 1;
-
-    while (movimentoCavalo--)
-    {
-        for (int i = 0; i < 2; i++)
-        {
-            printf("Baixo\n");
+    // Loop externo
+    for (int v = 0; v < 1; v++) {
+        // Loop interno
+        for (int h = 0; h < 1; h++) {
+            printf("Cima\n");
+            printf("Direita\n");
         }
-        printf("Esquerda\n");
     }
+
+    bispo(casas - 1);
+}
+
+// Função recursiva para Rainha (move para a esquerda)
+void rainha(int casas) {
+    if (casas == 0) return;
+    printf("Esquerda\n");
+    rainha(casas - 1);
+}
+
+// Cavalo: duas casas para cima e uma para a direita (movimento em "L")
+void cavalo() {
+    int movimentos = 0;
+
     
+    for (int i = 0; i < 3; i++) {
+        if (i == 2) break;
+        printf("Cima\n");
+        movimentos++;
+    }
+
     
+    for (int j = 0; j < 2; j++) {
+        if (j == 0) {
+            printf("Direita\n");
+            continue; 
+        }
+    }
+}
+
+// Função Principal
+    int main() {
+        
+    // Quantidade de casas para cada peça
+    int casasTorre = 5;
+    int casasBispo = 5;
+    int casasRainha = 8;
+
+    // Movimento da Torre
+    printf("Movimento da Torre:\n");
+    torre(casasTorre);
+
+    // Movimento do Bispo
+    printf("\nMovimento do Bispo:\n");
+    bispo(casasBispo);
+
+    // Movimento da Rainha
+    printf("\nMovimento da Rainha:\n");
+    rainha(casasRainha);
+
+    // Movimento do Cavalo
+    printf("\nMovimento do Cavalo:\n");
+    cavalo();
+
     return 0;
 }
